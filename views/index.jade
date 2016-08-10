@@ -1,0 +1,44 @@
+extends layout
+block content
+	h1= title
+	p Welcome to #{title}
+	
+	h3 Real-time numbers
+	p#numbers
+	
+	h3 Real-time input
+	form(action='')
+		input#msg(type='text')
+		button#bt-send(type='submit') send
+	
+	h4 messages
+	p#messages
+	
+	
+	script(src='/socket.io/socket.io.js')
+	script(type='text/javascript').
+		var socket = io.connect('http://192.168.0.11:3000');
+
+		socket.io.on('connect_error', function(err){
+			console.error(err);
+		});
+
+		socket.on('numbersAllTheTime', function(data){
+			document.getElementById('numbers').innerHTML = data.number;
+		});
+
+		socket.emit('showstuff', {aquiQualquerCoisa:'uma string vinda do cliente'});
+
+		document.getElementById('bt-send').addEventListener('click', function(event){
+			event.preventDefault();
+			var msgTyped = document.getElementById('msg').value;
+			document.getElementById('messages').innerHTML += msgTyped + '<br/>';
+			socket.emit('sendMessage', {msg:msgTyped});
+
+			document.getElementById('msg').value = '';
+			document.getElementById('msg').focus();
+		});
+		
+		socket.on('messageRecieved', function(data){
+			document.getElementById('messages').innerHTML += data.messages + '<br/>';
+		});
