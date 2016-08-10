@@ -9,7 +9,7 @@ $ npm install
 
 ```
 
-## run the app
+## Run the app
 If you have Gulp installed in your machine, install the dev dependencies then run the following command on your terminal:
 
 ``` sh
