@@ -17,7 +17,9 @@ block content
 	
 	script(src='/socket.io/socket.io.js')
 	script(type='text/javascript').
-		var socket = io.connect('http://192.168.0.11:3000');
+		var url = window.location.href
+				
+		var socket = io.connect(url);
 
 		socket.io.on('connect_error', function(err){
 			console.error(err);
