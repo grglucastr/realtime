@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var server = require('http').Server(app);
-server.listen(3000);
+var port = process.env.PORT || '3000';
+server.listen(port);
 
 var routes = require('./routes/index')(server);
 var users = require('./routes/users');
