@@ -5,6 +5,6 @@ This is a getting started with Socket.io in Node.js
 
 ``` sh
 
-npm install
+$ npm install
 
 ```
